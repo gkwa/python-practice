@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<manifest>
+  <remote fetch="https://github.com/TaylorMonacelli"
+          name="origin" />
+  <project name="move_projects_to_github"
+           path="move_projects_to_github"
+           remote="origin"
+           revision="master" />
+  <project name="7z_practice"
+           path="7z_practice"
+           remote="origin"
+           revision="master" />
+  <project name="cygwin-setup"
+           path="cygwin-setup"
+           remote="origin"
+           revision="master" />
+  <project name="streambox_app_automation"
+           path="streambox_app_automation"
+           remote="origin"
+           revision="master" />
+  <project name="emacs_batch_mode_practice"
+           path="emacs_batch_mode_practice"
+           remote="origin"
+           revision="master" />
+  <project name="manifest"
+           path="manifest"
+           remote="origin"
+           revision="master" />
+  <project name="wedu-control"
+           path="wedu-control"
+           remote="origin"
+           revision="master" />
+</manifest>
