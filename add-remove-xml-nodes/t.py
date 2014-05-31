@@ -60,6 +60,6 @@ if args.add:
         clone = deepcopy(root.find('project'))
         clone.attrib['name'] = args.add
         clone.attrib['path'] = args.add
-        root.insert(0,clone)
+        root.insert(1,clone)
 
 document.write(inputfile, encoding='utf-8', xml_declaration=True)
