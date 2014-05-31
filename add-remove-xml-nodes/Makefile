@@ -10,6 +10,10 @@ TIDY_SW += -f $@.err
 
 date=$(shell sh -c date +"%Y-%m-%d %H:%M:%S" | tr ' ' '-')
 
+trand: test_rand
+test_rand: default.xml
+	python t.py -f default.xml --rand
+
 tr: test_remove
 test_remove: proj='7z_practice'
 test_remove: default.xml

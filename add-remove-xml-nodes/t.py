@@ -16,11 +16,13 @@ from copy import deepcopy
 import sys
 import xml.etree.cElementTree as ET
 import ConfigParser
+import random
 
 config = ConfigParser.RawConfigParser()
 
 parser = argparse.ArgumentParser()
 
+parser.add_argument("-n", "--rand", help="choose random project to move", action="store_true")
 parser.add_argument("-f", "--file", help="file to add/remove note to/from")
 parser.add_argument("-r", "--remove", help="node to remove")
 parser.add_argument("-a", "--add", help="node to add")
@@ -33,6 +35,12 @@ if not inputfile:
 
 document = ET.parse(inputfile)
 root = document.getroot()
+
+if args.rand:
+    projList = []
+    for elem in document.iter('project'):
+        projList.append(elem.attrib['name'])
+    print(random.choice(projList))
 
 # find a project element and remove it
 if args.remove:
