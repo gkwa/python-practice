@@ -59,7 +59,6 @@ if args.add:
     if warn == "":
         clone = deepcopy(root.find('project'))
         clone.attrib['name'] = args.add
-        clone.attrib['path'] = args.add
         root.insert(2,clone)
 
 document.write(inputfile, encoding='utf-8', xml_declaration=True)
