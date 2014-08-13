@@ -1,5 +1,3 @@
-# -*- python -*-
-
 '''
 python cElementTree first node
 python cElementTree append node
