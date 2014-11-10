@@ -1,4 +1,5 @@
+summarize:
+	python summarize.py f.html
+
 check:
-	python t2.py f.html
-t:
-	python t1.py f.html
+	python check.py f.html
