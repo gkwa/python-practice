@@ -89,11 +89,16 @@ months = ['September','October']
 
 print "Product\tRegion\t%s\t%s" %(months[0],months[1])
 
+summary={}
 for prod in sorted(str(p) for p in prods):
     for region in sorted(str(r) for r in regions):
-        print "%s\t%s\t" %(prod,region),
+        key = "%s\t%s" %(prod,region)
+        if not key in summary:
+            summary[key] = { months[0]: 0, months[1]: 0}
         for month in months:
             for record in records:
                 if (record.month == month) and (record.product_title == prod) and (record.region == region):
-                    print "%s\t" %(record.product_price),
-        print
+                    summary[key][month] = record.product_price
+
+for key in summary:
+    print "%s\t%s\t%s" %(key,summary[key][months[0]],summary[key][months[1]])
