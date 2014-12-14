@@ -1,0 +1,18 @@
+[main]
+logdir=/var/log/puppet
+vardir=/var/lib/puppet
+ssldir=/var/lib/puppet/ssl
+rundir=/var/run/puppet
+factpath=$vardir/lib/facter
+basemodulepath=$confdir/modules
+
+manifest=$confdir/manifests/
+
+[master]
+masterport = 8140
+ssl_client_header = HTTP_X_CLIENT_S_DN
+ssl_client_verify_header = HTTP_X_CLIENT_VERIFY
+
+[agent]
+server = 1c5f908daf79
+masterport = 8140
