@@ -53,8 +53,13 @@ dct9 = xml9.xpath("//storage")[0].attrib
 df9 = pd.DataFrame(dct9.items(),columns=['Field', 'LiveUS'])
 m8 = pd.merge(m7, df9, on='Field', how='outer')
 
-m9 = m8
-n1 = m8.T
+xml10 = parse('slsserver_autogen_LiveHK.xml')
+dct10 = xml10.xpath("//storage")[1].attrib
+df10 = pd.DataFrame(dct10.items(),columns=['Field', 'LiveHK'])
+m9 = pd.merge(m8, df10, on='Field', how='outer')
+
+m9 = m9
+n1 = m9.T
 
 print n1
-print m8
+print m9
