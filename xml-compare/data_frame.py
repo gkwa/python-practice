@@ -7,7 +7,7 @@ from pandas import *
 pd.set_option('display.max_colwidth', 1000)
 pd.set_option('display.max_rows', 500)
 pd.set_option('display.max_columns', 500)
-pd.set_option('display.width', 1000)
+pd.set_option('display.width', 10000)
 
 xml1 = parse('slsserver_autogen_LiveDE.xml')
 dct1 = xml1.xpath("//storage")[1].attrib
