@@ -6,15 +6,15 @@ ifeq (Darwin,$(uname_s))
 	SUDO=sudo
 endif
 
+test:
+	$(MAKE) install
+	mkdir -p $(isolated_dir) && cp test_foo.py $(isolated_dir) && cd $(isolated_dir) && python test_foo.py
+
 bdist_wininst:
 	python setup.py bdist_wininst
 
 sdist:
 	python setup.py sdist
-
-test:
-	$(MAKE) install
-	mkdir -p $(isolated_dir) && cp test_foo.py $(isolated_dir) && cd $(isolated_dir) && python test_foo.py
 
 install:
 	$(SUDO) python setup.py install
