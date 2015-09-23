@@ -6,6 +6,7 @@ from __future__ import print_function
 from lxml import etree
 from lxml.html import parse
 from pprint import pprint
+import re
 
 f = open('out.csv','w')
 
@@ -35,6 +36,11 @@ for urldata in data.xpath('//urldata'):
 
     valid_elem=urldata.xpath('.//valid')[0]
     status=valid_elem.get('result')
+
+    # i don't care if the community feed links are broken:
+    if re.search('.*community.*',url) or re.search('.*community.*',parent_url):
+        print("skipping %s"%url)
+        continue
 
     try:
         print("{name}~{status}~{dltime}~{parent_url}~{url}".format(
