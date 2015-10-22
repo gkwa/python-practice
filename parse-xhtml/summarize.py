@@ -73,9 +73,8 @@ for tpl in [tsept, toct]:
 
 # pprint((records))
 
-from sets import Set
 
-prods = Set()
+prods = set()
 for r in records:
     prods.add(r.product_title)
 
