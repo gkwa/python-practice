@@ -21,7 +21,7 @@ class Record:
         self.product_price = 0
 
     def displayEmployee(self):
-        print "Region : ", self.region
+        print("Region : ", self.region)
 
     def __repr__(self):
           return "<Record month:%s region:%s product:%s productPrice:%s RegionTotal:%s>" % (self.month, self.region, self.product_title, self.product_price,  self.region_total)
@@ -37,11 +37,11 @@ page = parse('f.html')
 
 # September
 tsept = ("September", page.xpath("//span[1 and @class='c7' and .='Usage']/ancestor::table[@class='c17']")[1])
-# print etree.tostring(t,pretty_print=True)
+# print(etree.tostring(t,pretty_print=True))
 
 # October
 toct = ("October", page.xpath("//span[2 and @class='c7' and .='Usage']/ancestor::table[@class='c17']")[0])
-# print etree.tostring(t,pretty_print=True)
+# print(etree.tostring(t,pretty_print=True))
 
 records = []
 
@@ -58,7 +58,7 @@ for tpl in [tsept, toct]:
         region_total = region_total.replace(',','').replace('$','')
         monthly_total+= float(region_total)
 
-        # print len(totals)
+        # print(len(totals))
         for total in region_table.xpath(".//*[text()='Total:']"):
             r = Record(month.strip(),region.text.strip())
             r.region_total = region_total.strip()
@@ -68,10 +68,10 @@ for tpl in [tsept, toct]:
             r.product_price = tmp.replace('$','').replace(',','').strip()
 
             records.append(r)
-    print "Monthly total for %s: $%s" %(month,monthly_total)
-    print "Header price difference ($%s-$%s): %s" %(header_sept_price,header_oct_price,header_oct_price-header_sept_price)
+    print("Monthly total for %s: $%s" %(month,monthly_total))
+    print("Header price difference ($%s-$%s): %s" %(header_sept_price,header_oct_price,header_oct_price-header_sept_price))
 
-# pprint(records)
+# pprint((records))
 
 from sets import Set
 
@@ -79,15 +79,15 @@ prods = Set()
 for r in records:
     prods.add(r.product_title)
 
-# print "\n".join(sorted(str(e) for e in prods))
+# print("\n".join(sorted(str(e) for e in prods)))
 
-regions = Set()
+regions = set()
 for r in records:
     regions.add(r.region)
 
 months = ['September','October']
 
-print "Product\tRegion\t%s\t%s" %(months[0],months[1])
+print("Product\tRegion\t%s\t%s" %(months[0],months[1]))
 
 summary={}
 for prod in sorted(str(p) for p in prods):
@@ -101,4 +101,4 @@ for prod in sorted(str(p) for p in prods):
                     summary[key][month] = record.product_price
 
 for key in summary:
-    print "%s\t%s\t%s" %(key,summary[key][months[0]],summary[key][months[1]])
+    print("%s\t%s\t%s" %(key,summary[key][months[0]],summary[key][months[1]]))
