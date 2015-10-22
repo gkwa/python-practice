@@ -1,0 +1,50 @@
+http://lxml.de/installation.html
+
+MS Windows
+
+For MS Windows, recent lxml releases feature community donated binary
+distributions, although you might still want to take a look at the
+related FAQ entry. If you fail to build lxml on your MS Windows system
+from the signed and tested sources that we release, consider using the
+binary builds from PyPI or the unofficial Windows binaries that
+Christoph Gohlke generously provides.
+
+http://www.lfd.uci.edu/~gohlke/pythonlibs/#lxml
+
+#+BEGIN_SRC 
+pip3 install lxml-3.4.4-cp35-none-win32.whl
+#+END_SRC
+
+** log
+
+#+BEGIN_SRC cmd
+C:\cygwin\home\Administrator\pdev\streambox\crawl_ms_myoem>pip3 install lxml-3.4.4-cp35-none-win32.whl
+Processing c:\cygwin\home\administrator\pdev\streambox\crawl_ms_myoem\lxml-3.4.4-cp35-none-win32.whl
+Installing collected packages: lxml
+Successfully installed lxml-3.4.4
+
+C:\cygwin\home\Administrator\pdev\streambox\crawl_ms_myoem>pip3 install lxml
+Requirement already satisfied (use --upgrade to upgrade): lxml in c:\users\administrator\appdata\local\programs\python\python35-32\lib\site-packages
+
+C:\cygwin\home\Administrator\pdev\streambox\crawl_ms_myoem>pip3 install --force lxml
+Requirement already satisfied (use --upgrade to upgrade): lxml in c:\users\administrator\appdata\local\programs\python\python35-32\lib\site-packages
+
+C:\cygwin\home\Administrator\pdev\streambox\crawl_ms_myoem>pip3 install Sets
+Collecting Sets
+  Could not find a version that satisfies the requirement Sets (from versions: )
+
+No matching distribution found for Sets
+
+C:\cygwin\home\Administrator\pdev\streambox\crawl_ms_myoem>pip3 install sets
+Collecting sets
+  Could not find a version that satisfies the requirement sets (from versions: )
+
+No matching distribution found for sets
+
+C:\cygwin\home\Administrator\pdev\streambox\crawl_ms_myoem>pip3 install set
+Collecting set
+  Could not find a version that satisfies the requirement set (from versions: )
+  No matching distribution found for set
+
+C:\cygwin\home\Administrator\pdev\streambox\crawl_ms_myoem>
+#+END_SRC
