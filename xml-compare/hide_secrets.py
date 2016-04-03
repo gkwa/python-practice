@@ -16,6 +16,7 @@ t = etree.parse(args.file,parser)
 for elem in t.iterfind('storage'):
     for att in [
             'mysql_backup_pass'
+            ,'aws_s3_secret'
             ,'smtp_pass'
             ,'smtp_login'
             ,'bc_api_key'
