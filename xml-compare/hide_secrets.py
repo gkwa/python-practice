@@ -14,7 +14,7 @@ parser = etree.XMLParser(strip_cdata=False)
 t = etree.parse(args.file,parser)
 
 for elem in t.iterfind('storage'):
-    for att in ['mysql_backup_pass', 'smtp_pass', 'smtp_login', 'bc_api_key', 'bc_username']:
+    for att in ['mysql_backup_pass', 'smtp_pass', 'smtp_login', 'bc_api_key', 'bc_username', 'slsreport_mysql_user', 'slsreport_mysql_pass']:
         # print 'checking %s against %s' % (att,elem.attrib)
         if att in elem.attrib:
             # print 'found %s' % att
