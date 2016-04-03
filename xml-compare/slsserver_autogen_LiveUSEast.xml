@@ -3,122 +3,193 @@
   <Documentatation>
     <![CDATA[
 
-* ports in the below <ports> stanza must be listed in ascending order!!!
-  (ie 1770 comes before 1780, etc. or else you will not see incoming
-  streams in the Live tab of the web ui.)
+* purge_file_on_delete - when not empty, incoming streams with public
+drm, or empty, will be considered as drm equal to this value
+
+* debug_create_size - 1000 - debug value to simulate creating archive
+files. Only used for developer debugging purpose.
+
+* ffmpeg_path - depreciated variable.  No longer used.
+c:\SLS_DB\ffmpeg\bin\ffmpeg
+
+* required_ver_ls_php
+
+* email_template_path - default: includes/email_templates
+
+* bc_username - BigCommerce Store Username
+
+* bc_store_url - default https://store.streambox.com - BigCommerce Store
+url
+
+* bc_api_key - BigCommerce Store API Key
+
+* date_format
+
+* email_from
+
+* store_url
+
+* slsreport_mysql_pass
+
+* slsreport_mysql_user
+
+* lsbin_timeout - how long (in seconds) to wait for binary to response
+before giving up. This is to eliminate the long wait when binary is
+somehow not responding.  Example lsbin_timeout="3"
+
+* site_name
+
+* timezone
+
+* smtp_host - ES/Live can email you your password if you forget it.  So
+if you configure (smtp_login, smtp_host, smtp_pass and smtp_port), and
+you logout of ES/Live and at the login page, you click the forgot
+password link, then, will email be sent to your through this smtp_host.
+
+* smtp_login - see description in smtp_host.
+
+* smtp_pass - see description in smtp_host.
+
+* smtp_port - see description in smtp_host.
+
+* email_to_override - 
+
+* activity_log_display - default=50, maximum number of record to display
+on system log page
+
+* ports - in the below <ports> stanza must be listed in ascending
+order!!!  (ie 1770 comes before 1780, etc. or else you will not see
+incoming streams in the Live tab of the web ui.)
 
 * server_domain_name - We're adding server_domain_name and server_ip to
-  here because when localdb fails, then we can't use backup database
-  server_doamin_name and _ip because mulitple machines use that db.
-  Example: server_domain_name ="127.0.0.1"
+here because when localdb fails, then we can't use backup database
+server_doamin_name and _ip because mulitple machines use that db.
+Example: server_domain_name ="127.0.0.1"
 
 * server_ip - We're adding server_domain_name and server_ip to here
-  because when localdb fails, then we can't use backup database
-  server_doamin_name and _ip because mulitple machines use that db.
-  Example: server_ip="127.0.0.1"
+because when localdb fails, then we can't use backup database
+server_doamin_name and _ip because mulitple machines use that db.
+Example: server_ip="127.0.0.1"
 
 * mysql_backup_host - either null or hostname.  Example:
-  mysql_backup_host="livedb.streambox.com".  mysql_backup_host="" means
-  use mysql.default_host in php.ini.
+mysql_backup_host="livedb.streambox.com".  mysql_backup_host="" means
+use mysql.default_host in php.ini.
 
 * mysql_use_backup - boolean, 0 means use default database (see
-  mysql.default_host in php.ini), 1 means use backup database.  Example:
-  mysql_use_backup="0"
+mysql.default_host in php.ini), 1 means use backup database.  Example:
+mysql_use_backup="0"
 
 * mysql_backup_pass - mysql password for sls_php on
-  livedb.streambox.com.  If mysql_backup_host is empty, then
-  mysql_use_backup and mysql_backup_pass are irrelevant.
+livedb.streambox.com.  If mysql_backup_host is empty, then
+mysql_use_backup and mysql_backup_pass are irrelevant.
 
-  If mysql_backup_pass is wrong, then when server goes into backup mode
-  and sysadmin will be locked out completely.
+If mysql_backup_pass is wrong, then when server goes into backup mode
+and sysadmin will be locked out completely.
 
-  If this happens, then the only option is to modify slsserver.xml, then
-  fix the password and restart apache service.
+If this happens, then the only option is to modify slsserver.xml, then
+fix the password and restart apache service.
 
 * actl3trans - absolute path to the ACT-L3 transcoder.exe.  Example:
-  actl3trans="c:\SLS_DB\actl3trans\transcoder.exe"
+actl3trans="c:\SLS_DB\actl3trans\transcoder.exe"
 
 * act_port - for cases where sls.exe and mobile devices can't activate
-  with activation server over port TCP/80, you can set act_port to use a
-  different port other than 80.  If act_port is not defined in
-  <storage/> element, then activatin will go over TCP/80 by default.
+with activation server over port TCP/80, you can set act_port to use a
+different port other than 80.  If act_port is not defined in <storage/>
+element, then activatin will go over TCP/80 by default.
 
-  We've seen cases where although $ telnet {activation server IP} 80
-  seems to succeed, still sls.exe can't communicate properly with
-  activation server as though something is mangling the TCP/80
-  connection.  Example: act_port="85" Here sls.exe would try to activate
-  using TCP port 85.
+We've seen cases where although $ telnet {activation server IP} 80 seems
+to succeed, still sls.exe can't communicate properly with activation
+server as though something is mangling the TCP/80 connection.  Example:
+act_port="85" Here sls.exe would try to activate using TCP port 85.
 
 * archive - If this boolean is "yes" then store ACT-L3 streams to the
-  folder specified by the 'path' parameter.  If no, dont store.
-  Example: archive="yes"
+folder specified by the 'path' parameter.  If no, dont store.  Example:
+archive="yes"
 
 * convert_amt - The overall maximum number of trascoders allowed to run
-  simultaneously.  By transcoders here we mean not just Streambox
-  transcoder.exe, but all the others including (mencoder.exe,
-  mplayer.exe, ffmpeg.exe, transcoder.exe, others?).
+simultaneously.  By transcoders here we mean not just Streambox
+transcoder.exe, but all the others including (mencoder.exe, mplayer.exe,
+ffmpeg.exe, transcoder.exe, others?).
+
+* data_drive - The data partition.  Example data_drive="d:" or
+data_drive="e:", etc.  This might be the OS partition if there is no
+data partition available, but ideally we want to store ever growing log
+files and media files on the data partition.
+
+This parameter should be set at install time either by installer or
+manually.
 
 * flash_amount - limit the number of simultaneous processes that can
-  create flash files.  Example: flash_amount="10"
+create flash files.  Example: flash_amount="10"
 
 * flash_max - Example: flash_max="600"
 
 * frames - The maximum number of frames to generate for Flash.  Example:
-  frames="1000"
+frames="1000"
 
 * frames_thumb - The number of images that mplayer should create from
-  the quicktime mov file.  Range [1,frames] (see the frames parameter).
-  If frames_thumb is greater than frames, then sls.exe will cut the MOV
-  off at the same value of frames, therefore frames_thumb range is
-  [1,frames].  Example frames_thumb="50"
+the quicktime mov file.  Range [1,frames] (see the frames parameter).
+If frames_thumb is greater than frames, then sls.exe will cut the MOV
+off at the same value of frames, therefore frames_thumb range is
+[1,frames].  Example frames_thumb="50"
 
 * limiter - The maximum number of instances sls.exe allows of the
-  Streambox transcoder.exe process to run simultaneously.  If limiter is
-  not listed in this config, then default value is 2.
+Streambox transcoder.exe process to run simultaneously.  If limiter is
+not listed in this config, then default value is 2.
 
 * meta - yes/no.  Default value is meta="yes" if its not specified.
-  meta="no" means sls.exe doesn't wait for a metadata packet. It
-  registers stream immediately after any packet comes.
+meta="no" means sls.exe doesn't wait for a metadata packet. It registers
+stream immediately after any packet comes.
 
-  It's a workaround that helps very old encoders to be processed as soon
-  as possible.
+It's a workaround that helps very old encoders to be processed as soon
+as possible.
 
 * nopic - The image to display before the thumbnail has been created by
-  mplayer.  This file must exist in the web $docroot/ls directory.
-  Example: nopic="nopic2.jpg"
+mplayer.  This file must exist in the web $docroot/ls directory.
+Example: nopic="nopic2.jpg"
 
 * path - The absolute path to store Streambox media files.  'webpath'
-  and 'path' are the same values now, so you should set 'path' equal to
-  the same value as 'webpath'.  This is legacy.  Originally 'webpath'
-  and 'path' meant something different, but now they're the same.
-  Example: path="c:\Apache\htdocs\ls\actl3files"
+and 'path' are the same values now, so you should set 'path' equal to
+the same value as 'webpath'.  This is legacy.  Originally 'webpath' and
+'path' meant something different, but now they're the same.  Example:
+path="c:\Apache\htdocs\ls\actl3files"
 
 * preview - Example: preview="c:\SLS_DB\wrappers\mcwrap_mov_flv.cmd"
 
 * thumb - The comandline used to generate frames for the thumbnail.
-  Example: thumb="C:\SLS_DB\wrappers\extract_frame.cmd
-  &quot;C:\SLS_DB\wrappers&quot;"
+Example: thumb="C:\SLS_DB\wrappers\extract_frame.cmd
+&quot;C:\SLS_DB\wrappers&quot;"
 
 * thumb_amount - limit the number of simultaneous process to create
-  thumbnails.  Example: thumb_amount="20"
+thumbnails.  Example: thumb_amount="20"
 
 * thumb_max - The maximum number of seconds to allow the thumbnail to be
-  created.  The purpose of this is to prevent mplayer hanging from
-  stopping the thumbnial generation workflow.  So, for example, if
-  mplayer hangs for longer than thumb_max seconds, then sls.exe will
-  kill off the mplayer process.  Example: thumb_max="300"
+created.  The purpose of this is to prevent mplayer hanging from
+stopping the thumbnial generation workflow.  So, for example, if mplayer
+hangs for longer than thumb_max seconds, then sls.exe will kill off the
+mplayer process.  Example: thumb_max="300"
 
 * webpath - The absolute path to store Streambox media files.  'webpath'
-  and 'path' are the same values now, so you should set path equal to
-  the same value as webpath.  This is legacy.  Originally 'webpath' and
-  'path' meant something different, but now they're the same.  Example:
-  webpath="c:\Apache\htdocs\ls\actl3files"
+and 'path' are the same values now, so you should set path equal to the
+same value as webpath.  This is legacy.  Originally 'webpath' and 'path'
+meant something different, but now they're the same.  Example:
+webpath="c:\Apache\htdocs\ls\actl3files"
 
 ]]>
 </Documentatation>
   <ports>
     <Port data="1770"/>
+    <port data="1771"/>
+    <port data="1772"/>
+    <port data="1773"/>
+    <port data="1774"/>
+    <port data="1775"/>
+    <port data="1776"/>
+    <port data="1777"/>
+    <port data="1778"/>
+    <port data="1779"/>
     <port data="1780"/>
+    <port data="1900"/>
   </ports>
-  <storage act_port="80" actl3trans="c:\SLS_DB\actl3trans\transcoder.exe" archive="yes" convert_amt="1" email_from="Streambox Cloud &lt;sender@streambox.com&gt;" flash_amount="10" flash_max="600" frames="1000" frames_thumb="1000" limiter="2" mp4="c:\SLS_DB\wrappers\exit_with_success.cmd" mver="Mg==" mysql_backup_host="livedb.streambox.com" mysql_use_backup="0" nopic="nopic2.jpg" ogg="c:\SLS_DB\wrappers\exit_with_success.cmd" path="c:\Apache\htdocs\ls\actl3files" play="c:\SLS_DB\mplayer\mplayer.exe" preview="c:\SLS_DB\wrappers\mcwrap_mov_mp4.cmd" server_domain_name="liveuseast.streambox.com" server_ip="54.83.19.155" site_name="USEast-Streambox Live" thumb="C:\SLS_DB\wrappers\extract_frame.cmd &quot;C:\SLS_DB\wrappers&quot;" thumb_amount="20" thumb_max="300" webpath="c:\Apache\htdocs\ls\actl3files" data_drive="d:" tnc_server="http://54.245.163.78:1926" bc_store_url="https://store.streambox.com" email_to_accounting="live@streambox.com" log_command="" server_private_ip="" email_to_override="" timezone="America/New_York" email_to_support="supdept@streambox.com" ldmp_proto="1" tc_create_wait_sec="600"/>
+  <storage data_drive="d:" server_domain_name="liveuseast.streambox.com" server_ip="54.83.19.155" site_name="USEast-Streambox Live" email_to_accounting="supdept@streambox.com" email_to_support="supdept@streambox.com" act_port="80" actl3trans="c:\SLS_DB\actl3trans\transcoder.exe" archive="yes" bc_store_url="https://store.streambox.com/api/v2" convert_amt="1" date_format="" debug_create_size="" email_from="Streambox Cloud &lt;sender@streambox.com&gt;" email_template_path="includes/email_templates" email_to_override="" ffmpeg_path="" flash_amount="10" flash_max="600" frames="1000" frames_thumb="1000" limiter="2" lsbin_timeout="3" meta="yes" mp4="c:\SLS_DB\wrappers\exit_with_success.cmd" mysql_backup_host="livedb.streambox.com" mysql_use_backup="1" nopic="nopic2.jpg" ogg="c:\SLS_DB\wrappers\exit_with_success.cmd" path="c:\Apache\htdocs\ls\actl3files" play="c:\SLS_DB\mplayer\mplayer.exe" preview="c:\SLS_DB\wrappers\mcwrap_mov_mp4.cmd" purge_file_on_delete="1" required_ver_ls_php="" smtp_host="ssl://smtp.gmail.com" smtp_port="465" store_url="https://store.streambox.com" timezone="America/Vancouver" thumb="C:\SLS_DB\wrappers\extract_frame.cmd &quot;C:\SLS_DB\wrappers&quot;" thumb_amount="20" tnc_server="http://tcm2.streambox.com:1926" thumb_max="300" activity_log_display="2500" webpath="c:\Apache\htdocs\ls\actl3files" mver="Mg=="/>
 </body>
