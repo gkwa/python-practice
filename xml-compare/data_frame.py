@@ -19,7 +19,7 @@ df2 = pd.DataFrame(dct2.items(),columns=['Field', 'LiveJP'])
 m1 = pd.merge(df1, df2, on='Field', how='outer')
 
 xml3 = parse('slsserver_autogen_LiveIN.xml')
-dct3 = xml3.xpath("//storage")[0].attrib
+dct3 = xml3.xpath("//storage")[1].attrib
 df3 = pd.DataFrame(dct3.items(),columns=['Field', 'LiveIN'])
 m2 = pd.merge(m1, df3, on='Field', how='outer')
 
@@ -49,7 +49,7 @@ df8 = pd.DataFrame(dct8.items(),columns=['Field', 'LiveUSEast'])
 m7 = pd.merge(m6, df8, on='Field', how='outer')
 
 xml9 = parse('slsserver_autogen_LiveUS.xml')
-dct9 = xml9.xpath("//storage")[0].attrib
+dct9 = xml9.xpath("//storage")[1].attrib
 df9 = pd.DataFrame(dct9.items(),columns=['Field', 'LiveUS'])
 m8 = pd.merge(m7, df9, on='Field', how='outer')
 
