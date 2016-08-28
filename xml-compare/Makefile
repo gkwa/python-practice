@@ -12,3 +12,7 @@ hide_secrets_test:
 
 tidy:
 	tidy -xml --tidy-mark no --doctype strict --vertical-space false --indent-attributes false --wrap-attributes false -wrap 60000 -q -i -c -modify *.xml
+
+clean:
+	rm -rf s
+	rm -f servers
