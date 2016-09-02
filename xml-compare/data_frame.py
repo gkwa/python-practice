@@ -34,4 +34,21 @@ pd.set_option('display.max_rows', 500)
 pd.set_option('display.max_columns', 500)
 pd.set_option('display.width', 10000)
 
-print(dfm.T)
+# I know these are unique already, including them creates noise
+dfm = dfm.drop(dfm[ dfm.Field == 'server_domain_name' ].index)
+dfm = dfm.drop(dfm[ dfm.Field == 'site_name' ].index)
+dfm = dfm.drop(dfm[ dfm.Field == 'server_ip' ].index)
+
+dft = dfm.T
+
+for i in list(dft.columns.values):
+    if len(dft[i].unique())<=2: # column has header label and 1 value
+        dft.drop(i, axis=1, inplace=True)
+
+print('{:->40}'.format(' Original'))
+print("%d columns total" % (len(list(dft.columns.values))))
+print(dft)
+
+print('{:->40}'.format(' Duplicates removed'))
+print("%d columns differ" % (len(list(dft.columns.values))))
+print(dft)
